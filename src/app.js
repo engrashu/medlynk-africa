@@ -1,0 +1,35 @@
+const express = require('express');
+const cors = require('cors');
+require('dotenv').config();
+const { connectDB } = require('./config/db');
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+// Health check — first route you can test in Postman
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Medlynk Africa API is running',
+    version: '1.0.0',
+    status: 'healthy'
+  });
+});
+
+app.use('/api/medicines', require('./routes/medicines'));
+// Routes (we add these one by one)
+
+app.use('/api/pharmacies', require('./routes/pharmacies'));
+
+const PORT = process.env.PORT || 3000;
+
+const start = async () => {
+  await connectDB();
+  app.listen(PORT, () => {
+    console.log(`🚀 Medlynk Africa API running on port ${PORT}`);
+    console.log(`📡 Test it: http://localhost:${PORT}`);
+  });
+};
+
+start();
