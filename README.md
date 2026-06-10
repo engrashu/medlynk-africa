@@ -1,24 +1,40 @@
 # Medlynk Africa
-### Connecting Healthcare Access — Douala, Cameroon
+**Connecting Healthcare Access — Douala, Cameroon**
 
 Bilingual (French/English) mobile-first platform that helps patients
-find authentic medicines at nearby pharmacies in real time.
+find authentic medicines at nearby verified pharmacies in real time.
 
-**Founder:** Ashu Bertrand  
-**Started:** June 8, 2026 — Day 1 of 120  
-**Stack:** React Native · AWS Amplify · Node.js · SQL Server 2022  
-**Domain:** medlynk.me  
+> No patient in Cameroon should visit 3 pharmacies to find one medicine.
 
-## What we are building
-- Patient app — search medicines, find pharmacies on map, get directions
-- Pharmacy dashboard — manage stock, receive reservations
-- Clinic & hospital directory — verified facilities with specialisations
-- SMS alerts — works on MTN and Orange Cameroon (+237)
+## Founder
+Ashu Bertrand ([@engrashu](https://github.com/engrashu))
+Started: June 8, 2026 — Day 1 of 120
 
-## API Modules completed
-- Medicines & pharmacy search with real-time stock
-- Phone OTP authentication with JWT
-- User profiles — bilingual, Cameroon phone normalization
+## Tech Stack
+- **Backend:** Node.js + Express
+- **Database:** SQL Server 2022 (local) → AWS Amplify (production)
+- **Mobile App:** React Native (Expo) — in progress
+- **Auth:** Phone OTP + JWT
+- **SMS:** Africa's Talking (+237 Cameroon)
+- **Maps:** Google Maps API
+- **Domain:** [medlynk.me](https://medlynk.me)
+
+## API Modules (completed)
+| Module | Status |
+|---|---|
+| Medicines & pharmacy search | ✅ Live |
+| Phone OTP authentication | ✅ Live |
+| User profiles (bilingual) | ✅ Live |
+| Clinics, hospitals & labs | 🔄 In progress |
+| SMS integration | ⏳ Month 2 |
+| React Native mobile app | ⏳ Month 2 |
+
+## Local Setup
+```bash
+npm install
+# Copy .env.example to .env and fill in your values
+npm run dev
+```
 
 ## Mission
-No patient in Cameroon should visit 3 pharmacies to find one medicine.
+MedConnect Africa is healthcare infrastructure — not just an app.
