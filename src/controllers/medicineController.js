@@ -132,10 +132,30 @@ const getCategories = async (req, res) => {
       ORDER BY name_fr ASC
     `);
 
+    let medicines = result.recordset;
+
+    if (req.query.lat && req.query.lng) {
+      const userLat = parseFloat(req.query.lat);
+      const userLng = parseFloat(req.query.lng);
+      medicines = medicines.map(m => {
+        m.distance_km = (m.latitude && m.longitude)
+          ? getDistanceKm(userLat, userLng, m.latitude, m.longitude)
+          : null;
+        return m;
+      });
+      medicines.sort((a, b) => {
+        if (a.distance_km === null) return 1;
+        if (b.distance_km === null) return -1;
+        return a.distance_km - b.distance_km;
+      });
+    }
+
     return res.json({
       success: true,
-      total: result.recordset.length,
-      categories: result.recordset,
+      query: name.trim(),
+      city: cityFilter,
+      total_results: medicines.length,
+      medicines,
     });
 
   } catch (err) {
