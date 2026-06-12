@@ -21,6 +21,10 @@ app.use('/api/medicines', require('./routes/medicines'));
 // Routes (we add these one by one)
 app.use('/api/users',      require('./routes/users'));
 app.use('/api/pharmacies', require('./routes/pharmacies'));
+app.use('/api/medicines',  require('./routes/medicines'));
+app.use('/api/pharmacies', require('./routes/pharmacies'));
+app.use('/api/users',      require('./routes/users'));
+app.use('/api/facilities', require('./routes/facilities'));
 
 const PORT = process.env.PORT || 3000;
 
