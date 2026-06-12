@@ -1,17 +1,32 @@
 # Medlynk Africa
-### Connecting Healthcare Access — Douala, Cameroon
+**Connecting Healthcare Access — Douala, Cameroon**
 
-A bilingual (French/English) mobile-first platform that helps patients
-find authentic medicines at nearby pharmacies in real time.
+Bilingual (French/English) mobile-first platform that helps patients
+find authentic medicines at nearby verified pharmacies in real time.
 
-**Built by:** Ashu Bertrand (engrashu)
-**Started:** June 8, 2026
-**Stack:** Node.js · SQL Server 2022 · React Native · AWS
+> No patient in Cameroon should visit 3 pharmacies to find one medicine.
 
-## API Modules (live)
-- Medicines & Pharmacy search
-- Phone OTP Authentication
-- Clinics, Hospitals & Labs (in progress)
+**Founder:** Ashu Bertrand ([@engrashu](https://github.com/engrashu))
+**Started:** June 8, 2026 · Day 1 of 120
+**Domain:** medlynk.me
 
-## Mission
-No patient in Cameroon should visit 3 pharmacies to find one medicine.
+## Stack
+Node.js · SQL Server 2022 · React Native (Expo) · AWS Amplify
+
+## API Modules
+| Module | Status |
+|---|---|
+| Medicines & pharmacy search | ✅ Live |
+| Phone OTP + JWT authentication | ✅ Live |
+| User profiles — bilingual FR/EN | ✅ Live |
+| Clinics, hospitals & labs | 🔄 Week 2 |
+| SMS alerts (Africa's Talking) | ⏳ Month 2 |
+| React Native mobile app | ⏳ Month 2 |
+
+## Local Setup
+```bash
+npm install
+cp .env.example .env
+# Fill in your SQL Server details
+npm run dev
+```

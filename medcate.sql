@@ -1,0 +1,7 @@
+SELECT TOP (1000) [id]
+      ,[name_fr]
+      ,[name_en]
+      ,[description]
+      ,[icon_code]
+      ,[created_at]
+  FROM [medlynk_africa].[dbo].[medicine_categories]
