@@ -12,29 +12,33 @@ Started: June 8, 2026 — Day 1 of 120
 
 ## Tech Stack
 - **Backend:** Node.js + Express
-- **Database:** SQL Server 2022 (local) → AWS Amplify (production)
-- **Mobile App:** React Native (Expo) — in progress
-- **Auth:** Phone OTP + JWT
-- **SMS:** Africa's Talking (+237 Cameroon)
+- **Database:** SQL Server 2022 (local dev) → AWS (production)
+- **Mobile App:** React Native + Expo (Month 2)
+- **Auth:** Phone OTP + JWT tokens
+- **SMS:** Africa's Talking — MTN/Orange Cameroon (+237)
 - **Maps:** Google Maps API
+- **WhatsApp:** Omnichannel intake — text, voice, ordonnance photo
 - **Domain:** [medlynk.me](https://medlynk.me)
 
-## API Modules (completed)
+## API Modules
 | Module | Status |
 |---|---|
-| Medicines & pharmacy search | ✅ Live |
-| Phone OTP authentication | ✅ Live |
-| User profiles (bilingual) | ✅ Live |
-| Clinics, hospitals & labs | 🔄 In progress |
-| SMS integration | ⏳ Month 2 |
-| React Native mobile app | ⏳ Month 2 |
+| Medicines & pharmacy search | Done |
+| Phone OTP authentication | Done |
+| User profiles — bilingual FR/EN | Done |
+| Clinics, hospitals & labs | This week |
+| SMS — Africa's Talking | Month 2 |
+| React Native mobile app | Month 2 |
+| WhatsApp Business intake | Stage 2 |
+| Voice + ordonnance OCR | Stage 3 |
 
 ## Local Setup
 ```bash
 npm install
-# Copy .env.example to .env and fill in your values
+cp .env.example .env
 npm run dev
 ```
 
 ## Mission
-MedConnect Africa is healthcare infrastructure — not just an app.
+No patient in Cameroon should visit 3 pharmacies to find one medicine.
+Built for Cameroon — low bandwidth, bilingual, community-first.
