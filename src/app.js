@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Health check — first route you can test in Postman
+// Health check
 app.get('/', (req, res) => {
   res.json({
     message: 'Medlynk Africa API is running',
@@ -17,14 +17,7 @@ app.get('/', (req, res) => {
   });
 });
 
-app.use('/api/medicines', require('./routes/medicines'));
-// Routes (we add these one by one)
-app.use('/api/users',      require('./routes/users'));
-app.use('/api/pharmacies', require('./routes/pharmacies'));
-app.use('/api/medicines',  require('./routes/medicines'));
-app.use('/api/pharmacies', require('./routes/pharmacies'));
-app.use('/api/users',      require('./routes/users'));
-app.use('/api/facilities', require('./routes/facilities'));
+// Routes — each registered ONCE
 app.use('/api/medicines',  require('./routes/medicines'));
 app.use('/api/pharmacies', require('./routes/pharmacies'));
 app.use('/api/users',      require('./routes/users'));

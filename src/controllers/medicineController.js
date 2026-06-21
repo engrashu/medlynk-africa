@@ -1,5 +1,17 @@
 const { getPool, sql } = require('../config/db');
 
+const getDistanceKm = (lat1, lng1, lat2, lng2) => {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLng = (lng2 - lng1) * Math.PI / 180;
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLng / 2) * Math.sin(dLng / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return Math.round(R * c * 10) / 10;
+};
+
 // Search medicines by name (French or English) + filter by city
 const searchMedicines = async (req, res) => {
   try {
@@ -67,12 +79,30 @@ const searchMedicines = async (req, res) => {
         VALUES (@medicine_searched, @city, @results_found)
       `);
 
+    let medicines = result.recordset;
+
+    if (req.query.lat && req.query.lng) {
+      const userLat = parseFloat(req.query.lat);
+      const userLng = parseFloat(req.query.lng);
+      medicines = medicines.map(m => {
+        m.distance_km = (m.latitude && m.longitude)
+          ? getDistanceKm(userLat, userLng, m.latitude, m.longitude)
+          : null;
+        return m;
+      });
+      medicines.sort((a, b) => {
+        if (a.distance_km === null) return 1;
+        if (b.distance_km === null) return -1;
+        return a.distance_km - b.distance_km;
+      });
+    }
+
     return res.json({
       success: true,
       query: name.trim(),
       city: cityFilter,
-      total_results: result.recordset.length,
-      medicines: result.recordset,
+      total_results: medicines.length,
+      medicines,
     });
 
   } catch (err) {
@@ -132,30 +162,10 @@ const getCategories = async (req, res) => {
       ORDER BY name_fr ASC
     `);
 
-    let medicines = result.recordset;
-
-    if (req.query.lat && req.query.lng) {
-      const userLat = parseFloat(req.query.lat);
-      const userLng = parseFloat(req.query.lng);
-      medicines = medicines.map(m => {
-        m.distance_km = (m.latitude && m.longitude)
-          ? getDistanceKm(userLat, userLng, m.latitude, m.longitude)
-          : null;
-        return m;
-      });
-      medicines.sort((a, b) => {
-        if (a.distance_km === null) return 1;
-        if (b.distance_km === null) return -1;
-        return a.distance_km - b.distance_km;
-      });
-    }
-
     return res.json({
       success: true,
-      query: name.trim(),
-      city: cityFilter,
-      total_results: medicines.length,
-      medicines,
+      total: result.recordset.length,
+      categories: result.recordset,
     });
 
   } catch (err) {

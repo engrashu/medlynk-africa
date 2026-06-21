@@ -1,4 +1,17 @@
 const { getPool, sql } = require('../config/db');
+const { getPool, sql } = require('../config/db');
+
+const getDistanceKm = (lat1, lng1, lat2, lng2) => {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLng = (lng2 - lng1) * Math.PI / 180;
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLng / 2) * Math.sin(dLng / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return Math.round(R * c * 10) / 10;
+};
 
 // Search facilities by type, city, or specialisation
 const searchFacilities = async (req, res) => {
@@ -36,10 +49,29 @@ const searchFacilities = async (req, res) => {
       ORDER BY f.is_emergency DESC, f.name_fr ASC
     `);
 
+    let facilities = result.recordset;
+
+    if (req.query.lat && req.query.lng) {
+      const userLat = parseFloat(req.query.lat);
+      const userLng = parseFloat(req.query.lng);
+      facilities = facilities.map(f => {
+        f.distance_km = (f.latitude && f.longitude)
+          ? getDistanceKm(userLat, userLng, f.latitude, f.longitude)
+          : null;
+        return f;
+      });
+      facilities.sort((a, b) => {
+        if (a.distance_km === null) return 1;
+        if (b.distance_km === null) return -1;
+        return a.distance_km - b.distance_km;
+      });
+    }
+
     return res.json({
       success: true,
-      total: result.recordset.length,
-      facilities: result.recordset,
+      total: facilities.length,
+      user_location: req.query.lat ? { lat: parseFloat(req.query.lat), lng: parseFloat(req.query.lng) } : null,
+      facilities,
     });
 
   } catch (err) {

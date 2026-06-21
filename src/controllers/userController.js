@@ -1,5 +1,6 @@
 const { getPool, sql } = require('../config/db');
 const jwt = require('jsonwebtoken');
+const { sendOTP: sendSMS } = require('../services/smsService');
 require('dotenv').config();
 
 // Generate JWT token
@@ -72,9 +73,9 @@ const requestOTP = async (req, res) => {
         `);
     }
 
-    // In production this sends via Africa's Talking SMS
-    // For now we return the OTP directly so you can test in Postman
-    console.log(`OTP for ${phone}: ${otp}`);
+    // Send real SMS via Africa's Talking
+    const smsResult = await sendSMS(phone, otp, lang);
+    console.log(`OTP for ${phone}: ${otp} — SMS status: ${smsResult.status || smsResult.error}`);
 
     const message = lang === 'fr'
       ? `Votre code Medlynk est: ${otp}. Valable 10 minutes.`
