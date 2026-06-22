@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medlynk Africa — Connectez-vous à la Santé</title>
+  <meta name="description" content="Trouvez vos médicaments, pharmacies et hôpitaux à Douala en temps réel. Find medicines, pharmacies and hospitals in Douala in real time.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- LANGUAGE TOGGLE -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="logo">Medlynk<span class="logo-dot">.</span></div>
+      <div class="lang-toggle">
+        <button class="lang-btn active" onclick="switchLang('fr')">FR</button>
+        <button class="lang-btn" onclick="switchLang('en')">EN</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge" data-fr="Bientôt disponible — Douala, Cameroun" data-en="Coming soon — Douala, Cameroon"></div>
+    <h1 data-fr="Trouvez vos médicaments.<br>Sans perdre de temps." data-en="Find your medicines.<br>Without wasting time."></h1>
+    <p class="hero-sub" data-fr="Medlynk connecte les patients aux pharmacies, cliniques et hôpitaux vérifiés à Douala — en temps réel, en français et en anglais." data-en="Medlynk connects patients to verified pharmacies, clinics and hospitals in Douala — in real time, in French and English."></p>
+    <div class="hero-cta">
+      <a href="#waitlist" class="btn-primary" data-fr="Rejoindre la liste d'attente" data-en="Join the waitlist"></a>
+      <a href="#problem" class="btn-secondary" data-fr="En savoir plus" data-en="Learn more"></a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">15+</div>
+        <div class="stat-label" data-fr="Médicaments essentiels" data-en="Essential medicines"></div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">+237</div>
+        <div class="stat-label" data-fr="Numéros camerounais" data-en="Cameroon numbers"></div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">2</div>
+        <div class="stat-label" data-fr="Langues (FR/EN)" data-en="Languages (FR/EN)"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section id="problem" class="section">
+    <div class="section-inner">
+      <div class="eyebrow" data-fr="Le problème" data-en="The problem"></div>
+      <h2 data-fr="Un patient à Douala visite 3 à 5 pharmacies pour un seul médicament." data-en="A patient in Douala visits 3 to 5 pharmacies for a single medicine."></h2>
+      <div class="problem-grid">
+        <div class="problem-card">
+          <div class="problem-icon">💊</div>
+          <h3 data-fr="Médicaments introuvables" data-en="Medicines unavailable"></h3>
+          <p data-fr="Aucun système ne permet de savoir quelle pharmacie a votre médicament en stock avant de vous déplacer." data-en="No system lets you know which pharmacy has your medicine in stock before you travel."></p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">🏥</div>
+          <h3 data-fr="Hôpitaux difficiles à localiser" data-en="Hospitals hard to locate"></h3>
+          <p data-fr="Les informations sur les cliniques, laboratoires et urgences sont dispersées et souvent obsolètes." data-en="Information about clinics, labs and emergencies is scattered and often outdated."></p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">⏱️</div>
+          <h3 data-fr="Temps et argent perdus" data-en="Time and money wasted"></h3>
+          <p data-fr="Chaque déplacement inutile coûte du transport, du temps et de l'énergie — surtout pour les familles à faible revenu." data-en="Every unnecessary trip costs transport, time and energy — especially for low-income families."></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTION -->
+  <section class="section section-dark">
+    <div class="section-inner">
+      <div class="eyebrow light" data-fr="La solution" data-en="The solution"></div>
+      <h2 class="light" data-fr="Medlynk: cherchez, trouvez, guérissez." data-en="Medlynk: search, find, heal."></h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-num">1</div>
+          <h3 data-fr="Cherchez un médicament" data-en="Search for a medicine"></h3>
+          <p data-fr="Tapez le nom en français ou anglais. Medlynk trouve les pharmacies qui l'ont en stock près de chez vous." data-en="Type the name in French or English. Medlynk finds pharmacies that have it in stock near you."></p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-num">2</div>
+          <h3 data-fr="Voyez sur la carte" data-en="See on the map"></h3>
+          <p data-fr="Pharmacies, cliniques et hôpitaux vérifiés affichés sur une carte avec distance, prix et numéro de téléphone." data-en="Verified pharmacies, clinics and hospitals shown on a map with distance, price and phone number."></p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-num">3</div>
+          <h3 data-fr="Obtenez l'itinéraire" data-en="Get directions"></h3>
+          <p data-fr="Directions vers la pharmacie ou l'hôpital le plus proche. Plus besoin de visiter 5 pharmacies." data-en="Directions to the nearest pharmacy or hospital. No more visiting 5 pharmacies."></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="eyebrow" data-fr="Le fondateur" data-en="The founder"></div>
+      <div class="founder-block">
+        <div class="founder-info">
+          <h2 data-fr="Construit par quelqu'un qui a vu le problème." data-en="Built by someone who saw the problem."></h2>
+          <p data-fr="Ashu Bertrand est un professionnel IT et leader communautaire basé à Douala. Après avoir vu un patient à l'hôpital incapable de trouver son médicament prescrit, il a fondé Medlynk pour que plus personne ne vive cette expérience." data-en="Ashu Bertrand is an IT professional and community leader based in Douala. After witnessing a patient at a hospital unable to find their prescribed medicine, he founded Medlynk so no one else has to face that experience."></p>
+          <ul class="founder-list">
+            <li data-fr="Diplôme en Informatique — Ensign College (GPA 3.97)" data-en="IT Degree — Ensign College (GPA 3.97)"></li>
+            <li data-fr="Pasteur communautaire à Mambanda, Douala depuis 2019" data-en="Community pastor in Mambanda, Douala since 2019"></li>
+            <li data-fr="Certifié IT Support & IT Professional" data-en="Certified IT Support & IT Professional"></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAITLIST -->
+  <section id="waitlist" class="section section-green">
+    <div class="section-inner center">
+      <h2 class="light" data-fr="Soyez les premiers informés." data-en="Be the first to know."></h2>
+      <p class="light" data-fr="Medlynk arrive bientôt à Douala. Laissez votre numéro et soyez parmi les premiers à l'utiliser." data-en="Medlynk is coming soon to Douala. Leave your number and be among the first to use it."></p>
+      <div class="waitlist-form">
+        <input type="tel" id="phone-input" placeholder="+237 6XX XXX XXX">
+        <button class="btn-primary" onclick="submitWaitlist()" data-fr="Je m'inscris" data-en="Sign me up"></button>
+      </div>
+      <p class="waitlist-note" data-fr="Gratuit. Aucun spam. Juste une notification quand Medlynk est prêt." data-en="Free. No spam. Just a notification when Medlynk is ready."></p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="logo">Medlynk<span class="logo-dot">.</span></div>
+      <p data-fr="Douala, Cameroun — Connecter l'accès aux soins de santé" data-en="Douala, Cameroon — Connecting Healthcare Access"></p>
+      <p>founder@medlynk.me</p>
+      <p class="footer-copy">© 2026 Medlynk Africa SARL</p>
+    </div>
+  </footer>
+
+  <script>
+    let currentLang = 'fr';
+
+    function switchLang(lang) {
+      currentLang = lang;
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector(`.lang-btn[onclick="switchLang('${lang}')"]`).classList.add('active');
+      document.documentElement.lang = lang;
+
+      document.querySelectorAll('[data-fr]').forEach(el => {
+        const text = el.getAttribute(`data-${lang}`);
+        if (el.tagName === 'INPUT') {
+          el.placeholder = text;
+        } else if (el.tagName === 'A' || el.tagName === 'BUTTON') {
+          el.textContent = text;
+        } else {
+          el.innerHTML = text;
+        }
+      });
+    }
+
+    // Initialize
+    switchLang('fr');
+
+    function submitWaitlist() {
+      const phone = document.getElementById('phone-input').value.trim();
+      if (!phone || phone.length < 9) {
+        alert(currentLang === 'fr' ? 'Veuillez entrer un numéro valide' : 'Please enter a valid number');
+        return;
+      }
+      const btn = document.querySelector('.waitlist-form .btn-primary');
+      btn.textContent = currentLang === 'fr' ? 'Merci!' : 'Thank you!';
+      btn.style.background = '#0A2A24';
+      document.getElementById('phone-input').value = '';
+      setTimeout(() => switchLang(currentLang), 3000);
+    }
+  </script>
+
+</body>
+</html>
