@@ -8,7 +8,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Health check
 app.get('/', (req, res) => {
   res.json({
     message: 'Medlynk Africa API is running',
@@ -17,7 +16,6 @@ app.get('/', (req, res) => {
   });
 });
 
-// Routes — each registered ONCE
 app.use('/api/medicines',  require('./routes/medicines'));
 app.use('/api/pharmacies', require('./routes/pharmacies'));
 app.use('/api/users',      require('./routes/users'));
