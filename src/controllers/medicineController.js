@@ -4,19 +4,17 @@ const getDistanceKm = (lat1, lng1, lat2, lng2) => {
   const R = 6371;
   const dLat = (lat2 - lat1) * Math.PI / 180;
   const dLng = (lng2 - lng1) * Math.PI / 180;
-  const a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-    Math.sin(dLng / 2) * Math.sin(dLng / 2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  return Math.round(R * c * 10) / 10;
+  const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(lat1 * Math.PI/180) * Math.cos(lat2 * Math.PI/180) *
+    Math.sin(dLng/2) * Math.sin(dLng/2);
+  return Math.round(6371 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)) * 10) / 10;
 };
 
 const searchMedicines = async (req, res) => {
   try {
     const { name, city } = req.query;
     if (!name || name.trim().length < 2) {
-      return res.status(400).json({ success: false, message: 'Please enter at least 2 characters to search' });
+      return res.status(400).json({ success: false, message: 'Please enter at least 2 characters' });
     }
     const pool = getPool();
     const searchTerm = `%${name.trim()}%`;
@@ -42,20 +40,18 @@ const searchMedicines = async (req, res) => {
       `);
 
     await pool.request()
-      .input('medicine_searched', sql.NVarChar, name.trim())
-      .input('city', sql.NVarChar, cityFilter)
-      .input('results_found', sql.Int, result.recordset.length)
-      .query(`INSERT INTO search_logs (medicine_searched, city, results_found) VALUES (@medicine_searched, @city, @results_found)`);
+      .input('searched', sql.NVarChar, name.trim())
+      .input('city2', sql.NVarChar, cityFilter)
+      .input('count', sql.Int, result.recordset.length)
+      .query(`INSERT INTO search_logs (medicine_searched, city, results_found) VALUES (@searched, @city2, @count)`);
 
     let medicines = result.recordset;
     if (req.query.lat && req.query.lng) {
-      const userLat = parseFloat(req.query.lat);
-      const userLng = parseFloat(req.query.lng);
+      const uLat = parseFloat(req.query.lat), uLng = parseFloat(req.query.lng);
       medicines = medicines.map(m => {
-        m.distance_km = (m.latitude && m.longitude) ? getDistanceKm(userLat, userLng, m.latitude, m.longitude) : null;
+        m.distance_km = (m.latitude && m.longitude) ? getDistanceKm(uLat, uLng, m.latitude, m.longitude) : null;
         return m;
-      });
-      medicines.sort((a, b) => (a.distance_km === null ? 1 : b.distance_km === null ? -1 : a.distance_km - b.distance_km));
+      }).sort((a, b) => (a.distance_km === null ? 1 : b.distance_km === null ? -1 : a.distance_km - b.distance_km));
     }
 
     return res.json({ success: true, query: name.trim(), city: cityFilter, total_results: medicines.length, medicines });
