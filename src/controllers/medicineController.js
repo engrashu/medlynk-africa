@@ -29,14 +29,30 @@ const searchMedicines = async (req, res) => {
           mc.name_fr AS category_fr, mc.name_en AS category_en,
           p.id AS pharmacy_id, p.name_fr AS pharmacy_name_fr, p.name_en AS pharmacy_name_en,
           p.address, p.quarter, p.city, p.phone_number, p.whatsapp_number,
-          p.latitude, p.longitude, ps.quantity, ps.price_fcfa, ps.updated_at AS stock_updated_at
+          p.latitude, p.longitude, p.listing_status,
+          ps.quantity, ps.price_fcfa, ps.updated_at AS stock_updated_at,
+          DATEDIFF(HOUR, ps.updated_at, GETDATE()) AS hours_since_update,
+          CASE
+            WHEN DATEDIFF(HOUR, ps.updated_at, GETDATE()) <= 6 THEN 'fresh'
+            WHEN DATEDIFF(HOUR, ps.updated_at, GETDATE()) <= 24 THEN 'recent'
+            WHEN DATEDIFF(HOUR, ps.updated_at, GETDATE()) <= 72 THEN 'aging'
+            ELSE 'stale'
+          END AS freshness
         FROM medicines m
         INNER JOIN pharmacy_stock ps ON ps.medicine_id = m.id AND ps.in_stock = 1 AND ps.quantity > 0
-        INNER JOIN pharmacies p ON p.id = ps.pharmacy_id AND p.is_active = 1 AND p.is_verified = 1
+        INNER JOIN pharmacies p ON p.id = ps.pharmacy_id AND p.is_active = 1 AND p.listing_status IN ('verified', 'claimed')
         LEFT JOIN medicine_categories mc ON mc.id = m.category_id
         WHERE (m.name_fr LIKE @searchTerm OR m.name_en LIKE @searchTerm OR m.generic_name LIKE @searchTerm)
           AND p.city = @city
-        ORDER BY ps.quantity DESC, p.name_fr ASC
+        ORDER BY
+          CASE WHEN p.listing_status = 'verified' THEN 0 ELSE 1 END,
+          CASE
+            WHEN DATEDIFF(HOUR, ps.updated_at, GETDATE()) <= 6 THEN 0
+            WHEN DATEDIFF(HOUR, ps.updated_at, GETDATE()) <= 24 THEN 1
+            WHEN DATEDIFF(HOUR, ps.updated_at, GETDATE()) <= 72 THEN 2
+            ELSE 3
+          END,
+          ps.quantity DESC
       `);
 
     await pool.request()

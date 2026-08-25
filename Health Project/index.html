@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medlynk Africa — Connecting Healthcare Access</title>
+  <meta name="description" content="Plateforme bilingue de santé connectant patients, pharmacies, cliniques et hôpitaux au Cameroun en temps réel. Bilingual healthcare platform connecting patients to pharmacies, clinics and hospitals in Cameroon.">
+  <meta property="og:title" content="Medlynk Africa — Connecting Healthcare Access">
+  <meta property="og:description" content="Trouvez vos médicaments. Trouvez votre clinique. En temps réel.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://medlynk.me">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>💚</text></svg>">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{--primary:#00C896;--teal:#0D9488;--dark:#0A2A24;--white:#FFFFFF;--light:#F0FDF4;--gray:#F4F6F7;--text:#134E4A;--muted:#6B7280;--emergency:#DC2626;--amber:#D97706}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:var(--text);line-height:1.6;background:var(--white)}
+    a{color:inherit;text-decoration:none}
+
+    /* NAV */
+    .nav{position:fixed;top:0;width:100%;background:rgba(255,255,255,0.97);z-index:100;border-bottom:1px solid #e5e7eb}
+    .nav-inner{max-width:1100px;margin:0 auto;padding:12px 24px;display:flex;justify-content:space-between;align-items:center}
+    .nav-logo{display:flex;align-items:center;gap:8px}
+    .nav-logo svg{width:32px;height:32px}
+    .nav-brand{font-size:20px;font-weight:800;color:var(--dark);letter-spacing:-0.5px}
+    .nav-brand span{color:var(--primary)}
+    .nav-links{display:flex;gap:24px;align-items:center}
+    .nav-links a{font-size:14px;font-weight:500;color:var(--muted);transition:color 0.2s}
+    .nav-links a:hover{color:var(--dark)}
+    .lang-toggle{display:flex;gap:3px}
+    .lang-btn{padding:5px 12px;border:1px solid #ddd;border-radius:20px;background:transparent;cursor:pointer;font-size:12px;font-weight:600;color:var(--muted);transition:all 0.2s}
+    .lang-btn.active{background:var(--dark);color:var(--white);border-color:var(--dark)}
+
+    /* HERO */
+    .hero{padding:120px 24px 60px;text-align:center;max-width:860px;margin:0 auto}
+    .hero-badge{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:var(--light);color:var(--teal);border-radius:24px;font-size:13px;font-weight:600;margin-bottom:24px;border:1px solid #bbf7d0}
+    .hero-badge .dot{width:8px;height:8px;background:var(--primary);border-radius:50%;animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+    .hero h1{font-size:clamp(28px,5vw,52px);font-weight:800;line-height:1.1;color:var(--dark);margin-bottom:20px;letter-spacing:-1.5px}
+    .hero h1 em{font-style:normal;color:var(--primary)}
+    .hero-sub{font-size:17px;color:var(--muted);max-width:620px;margin:0 auto 32px;line-height:1.7}
+    .hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}
+    .btn{padding:13px 28px;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s;border:none}
+    .btn-primary{background:var(--primary);color:var(--white)}
+    .btn-primary:hover{background:#00B085;transform:translateY(-1px)}
+    .btn-outline{background:transparent;color:var(--dark);border:2px solid #e5e7eb}
+    .btn-outline:hover{border-color:var(--dark)}
+    .btn-emergency{background:var(--emergency);color:var(--white);font-size:13px;padding:10px 20px}
+    .btn-emergency:hover{background:#B91C1C}
+
+    /* STATS BAR */
+    .stats-bar{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;padding:32px 0;border-top:1px solid #e5e7eb;border-bottom:1px solid #e5e7eb;max-width:700px;margin:0 auto}
+    .stat{text-align:center}
+    .stat-num{font-size:28px;font-weight:800;color:var(--dark)}
+    .stat-label{font-size:12px;color:var(--muted);margin-top:2px}
+
+    /* SECTIONS */
+    .section{padding:72px 24px}
+    .section-inner{max-width:1100px;margin:0 auto}
+    .section-dark{background:var(--dark)}
+    .section-green{background:var(--primary)}
+    .section-light{background:var(--light)}
+    .section-gray{background:var(--gray)}
+    .eyebrow{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--teal);margin-bottom:12px}
+    .eyebrow.light{color:rgba(255,255,255,0.5)}
+    .section h2{font-size:clamp(22px,3.5vw,36px);font-weight:800;line-height:1.15;color:var(--dark);margin-bottom:16px;letter-spacing:-0.5px}
+    .section h2.light{color:var(--white)}
+    .section-desc{font-size:16px;color:var(--muted);max-width:600px;margin-bottom:36px;line-height:1.7}
+    .section-desc.light{color:rgba(255,255,255,0.7)}
+
+    /* PROBLEM */
+    .problem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+    .problem-card{padding:28px;background:var(--white);border-radius:16px;border:1px solid #e5e7eb}
+    .problem-icon{font-size:28px;margin-bottom:14px}
+    .problem-card h3{font-size:16px;font-weight:700;margin-bottom:8px;color:var(--dark)}
+    .problem-card p{font-size:14px;color:var(--muted);line-height:1.6}
+
+    /* HOW IT WORKS */
+    .steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+    .step-card{padding:28px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);border-radius:16px}
+    .step-num{width:36px;height:36px;background:var(--primary);color:var(--white);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;margin-bottom:14px}
+    .step-card h3{font-size:16px;font-weight:700;color:var(--white);margin-bottom:8px}
+    .step-card p{font-size:14px;color:rgba(255,255,255,0.6);line-height:1.6}
+
+    /* PLATFORM */
+    .platform-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+    .platform-card{padding:24px;background:var(--white);border-radius:14px;border:1px solid #e5e7eb;text-align:center}
+    .platform-card .p-icon{font-size:32px;margin-bottom:10px}
+    .platform-card h3{font-size:15px;font-weight:700;color:var(--dark);margin-bottom:6px}
+    .platform-card p{font-size:13px;color:var(--muted);line-height:1.5}
+
+    /* EMERGENCY */
+    .emergency-bar{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+
+    /* COMPETITOR */
+    .comp-table{width:100%;border-collapse:collapse;font-size:14px;margin-top:20px}
+    .comp-table th{background:var(--dark);color:var(--white);padding:12px 16px;text-align:left;font-size:13px}
+    .comp-table td{padding:10px 16px;border-bottom:1px solid #e5e7eb}
+    .comp-table tr:nth-child(even){background:var(--gray)}
+    .comp-table .check{color:var(--primary);font-weight:700}
+    .comp-table .partial{color:var(--amber)}
+    .comp-table .no{color:var(--muted)}
+
+    /* FOUNDER */
+    .founder-info p{font-size:15px;color:var(--muted);margin-bottom:16px;line-height:1.7}
+    .founder-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+    .founder-tag{padding:6px 14px;background:var(--light);color:var(--teal);border-radius:20px;font-size:12px;font-weight:600}
+
+    /* WAITLIST */
+    .center{text-align:center}
+    .waitlist-form{display:flex;gap:12px;justify-content:center;max-width:460px;margin:0 auto 14px;flex-wrap:wrap}
+    .waitlist-form input{flex:1;min-width:200px;padding:14px 18px;border:2px solid rgba(255,255,255,0.3);border-radius:12px;background:rgba(255,255,255,0.15);color:var(--white);font-size:16px;outline:none}
+    .waitlist-form input::placeholder{color:rgba(255,255,255,0.5)}
+    .waitlist-form .btn-primary{background:var(--dark)}
+    .waitlist-note{font-size:12px;color:rgba(255,255,255,0.5);margin-top:8px}
+
+    /* FOOTER */
+    .footer{padding:48px 24px 32px;background:var(--dark);text-align:center}
+    .footer-brand{font-size:20px;font-weight:800;color:var(--white);margin-bottom:8px}
+    .footer-brand span{color:var(--primary)}
+    .footer p{font-size:13px;color:rgba(255,255,255,0.5);margin-top:6px}
+    .footer-links{display:flex;gap:24px;justify-content:center;margin-top:16px}
+    .footer-links a{font-size:13px;color:rgba(255,255,255,0.6);transition:color 0.2s}
+    .footer-links a:hover{color:var(--primary)}
+    .footer-copy{margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.1);font-size:11px;color:rgba(255,255,255,0.3)}
+
+    @media(max-width:640px){
+      .hero{padding:100px 18px 50px}
+      .section{padding:50px 18px}
+      .nav-links{display:none}
+      .stats-bar{gap:20px}
+      .waitlist-form{flex-direction:column}
+      .waitlist-form input{min-width:100%}
+      .comp-table{font-size:12px}
+      .comp-table th,.comp-table td{padding:8px 10px}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav"><div class="nav-inner">
+    <div class="nav-logo">
+      <svg viewBox="0 0 32 32" fill="none"><path d="M4 18L10 10L16 20L22 8L28 18" stroke="#00C896" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="28" cy="18" r="3" fill="#0D9488"/></svg>
+      <div class="nav-brand">Med<span>lynk</span></div>
+    </div>
+    <div class="nav-links">
+      <a href="#problem" data-fr="Le problème" data-en="The problem"></a>
+      <a href="#solution" data-fr="La solution" data-en="Solution"></a>
+      <a href="#platform" data-fr="Plateforme" data-en="Platform"></a>
+      <a href="#waitlist" data-fr="Rejoindre" data-en="Join"></a>
+    </div>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="switchLang('fr')">FR</button>
+      <button class="lang-btn" onclick="switchLang('en')">EN</button>
+    </div>
+  </div></nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge"><span class="dot"></span> <span data-fr="Plateforme en développement — Douala, Cameroun" data-en="Platform in development — Douala, Cameroon"></span></div>
+    <h1 data-fr="L'infrastructure digitale de santé<br>pour l'<em>Afrique Centrale</em>" data-en="Digital health infrastructure<br>for <em>Central Africa</em>"></h1>
+    <p class="hero-sub" data-fr="Medlynk connecte patients, pharmacies, cliniques, hôpitaux et laboratoires sur une seule plateforme bilingue — en temps réel, sécurisée et accessible à tous." data-en="Medlynk connects patients, pharmacies, clinics, hospitals and laboratories on a single bilingual platform — in real time, secure and accessible to all."></p>
+    <div class="hero-cta">
+      <a href="#waitlist" class="btn btn-primary" data-fr="Rejoindre la liste d'attente" data-en="Join the waitlist"></a>
+      <a href="#platform" class="btn btn-outline" data-fr="Découvrir la plateforme" data-en="Discover the platform"></a>
+      <a href="tel:+237677408458" class="btn btn-emergency" data-fr="🚨 Urgences" data-en="🚨 Emergency"></a>
+    </div>
+    <div class="stats-bar">
+      <div class="stat"><div class="stat-num">6</div><div class="stat-label" data-fr="Types de comptes" data-en="Account types"></div></div>
+      <div class="stat"><div class="stat-num">21</div><div class="stat-label" data-fr="Endpoints API actifs" data-en="Active API endpoints"></div></div>
+      <div class="stat"><div class="stat-num">2</div><div class="stat-label" data-fr="Langues (FR / EN)" data-en="Languages (FR / EN)"></div></div>
+      <div class="stat"><div class="stat-num">+237</div><div class="stat-label" data-fr="Cameroun natif" data-en="Cameroon native"></div></div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section id="problem" class="section section-light"><div class="section-inner">
+    <div class="eyebrow" data-fr="Le problème" data-en="The problem"></div>
+    <h2 data-fr="Un patient visite 3 à 5 pharmacies pour un seul médicament." data-en="A patient visits 3 to 5 pharmacies for a single medicine."></h2>
+    <p class="section-desc" data-fr="L'information de santé au Cameroun est fragmentée. Les patients perdent du temps, de l'argent et parfois leur vie." data-en="Healthcare information in Cameroon is fragmented. Patients lose time, money and sometimes their lives."></p>
+    <div class="problem-grid">
+      <div class="problem-card"><div class="problem-icon">💊</div><h3 data-fr="Médicaments introuvables" data-en="Medicines unavailable"></h3><p data-fr="Aucun système ne montre quelle pharmacie a votre médicament en stock. Les patients marchent de pharmacie en pharmacie." data-en="No system shows which pharmacy has your medicine in stock. Patients walk from pharmacy to pharmacy."></p></div>
+      <div class="problem-card"><div class="problem-icon">🏥</div><h3 data-fr="Établissements invisibles" data-en="Invisible facilities"></h3><p data-fr="Cliniques, laboratoires et spécialistes existent mais les patients ne savent pas où ils sont ni leurs horaires." data-en="Clinics, labs and specialists exist but patients don't know where they are or their hours."></p></div>
+      <div class="problem-card"><div class="problem-icon">📋</div><h3 data-fr="Dossiers médicaux perdus" data-en="Lost medical records"></h3><p data-fr="Chaque hôpital crée un nouveau dossier papier. Aucun hôpital ne voit les antécédents du patient." data-en="Every hospital creates a new paper file. No hospital can see previous records."></p></div>
+      <div class="problem-card"><div class="problem-icon">🚑</div><h3 data-fr="Urgences non localisées" data-en="Emergencies unlocated"></h3><p data-fr="En cas d'urgence, les patients ne savent pas quel hôpital est le plus proche avec les services dont ils ont besoin." data-en="In emergencies, patients don't know which hospital is nearest with the services they need."></p></div>
+      <div class="problem-card"><div class="problem-icon">⏱️</div><h3 data-fr="Temps et argent perdus" data-en="Time and money wasted"></h3><p data-fr="Chaque déplacement inutile coûte du transport, du temps et de l'énergie — surtout pour les familles à faible revenu." data-en="Every unnecessary trip costs transport, time and energy — especially for low-income families."></p></div>
+      <div class="problem-card"><div class="problem-icon">🔗</div><h3 data-fr="Systèmes déconnectés" data-en="Disconnected systems"></h3><p data-fr="Médecins, pharmacies et laboratoires travaillent indépendamment. Les résultats sont retardés, les prescriptions perdues." data-en="Doctors, pharmacies and labs work independently. Results are delayed, prescriptions lost."></p></div>
+    </div>
+  </div></section>
+
+  <!-- SOLUTION -->
+  <section id="solution" class="section section-dark"><div class="section-inner">
+    <div class="eyebrow light" data-fr="La solution" data-en="The solution"></div>
+    <h2 class="light" data-fr="Une plateforme. Tous les acteurs de santé. Connectés." data-en="One platform. All healthcare actors. Connected."></h2>
+    <p class="section-desc light" data-fr="Medlynk n'est pas une simple application — c'est l'infrastructure digitale de santé pour l'Afrique Centrale." data-en="Medlynk is not just an app — it is digital health infrastructure for Central Africa."></p>
+    <div class="steps-grid">
+      <div class="step-card"><div class="step-num">1</div><h3 data-fr="Cherchez" data-en="Search"></h3><p data-fr="Tapez le nom du médicament en français ou anglais. Medlynk trouve les pharmacies avec stock près de vous." data-en="Type the medicine name in French or English. Medlynk finds pharmacies with stock near you."></p></div>
+      <div class="step-card"><div class="step-num">2</div><h3 data-fr="Trouvez" data-en="Find"></h3><p data-fr="Pharmacies, cliniques et hôpitaux vérifiés affichés sur la carte avec distance, prix et numéro de téléphone." data-en="Verified pharmacies, clinics and hospitals shown on map with distance, price and phone number."></p></div>
+      <div class="step-card"><div class="step-num">3</div><h3 data-fr="Connectez" data-en="Connect"></h3><p data-fr="Obtenez l'itinéraire, réservez votre médicament, recevez vos résultats de labo — tout depuis Medlynk." data-en="Get directions, reserve your medicine, receive lab results — all from Medlynk."></p></div>
+      <div class="step-card"><div class="step-num">🚨</div><h3 data-fr="Urgences" data-en="Emergency"></h3><p data-fr="Ambulance, pompiers, police — un appui pour localiser et appeler les services d'urgence les plus proches." data-en="Ambulance, fire, police — one tap to locate and call the nearest emergency services."></p></div>
+    </div>
+  </div></section>
+
+  <!-- PLATFORM -->
+  <section id="platform" class="section"><div class="section-inner">
+    <div class="eyebrow" data-fr="La plateforme" data-en="The platform"></div>
+    <h2 data-fr="Une seule application. Six expériences différentes." data-en="One app. Six different experiences."></h2>
+    <p class="section-desc" data-fr="Chaque utilisateur télécharge Medlynk et choisit son type de compte. L'API charge automatiquement le bon tableau de bord." data-en="Every user downloads Medlynk and chooses their account type. The API automatically loads the right dashboard."></p>
+    <div class="platform-grid">
+      <div class="platform-card"><div class="p-icon">👤</div><h3 data-fr="Patient" data-en="Patient"></h3><p data-fr="Recherche de médicaments, carte des pharmacies, dossier médical, rendez-vous, urgences" data-en="Medicine search, pharmacy map, medical records, appointments, emergencies"></p></div>
+      <div class="platform-card"><div class="p-icon">💊</div><h3 data-fr="Pharmacie" data-en="Pharmacy"></h3><p data-fr="Inventaire, ordonnances, ventes, fournisseurs, alertes de stock" data-en="Inventory, prescriptions, sales, suppliers, stock alerts"></p></div>
+      <div class="platform-card"><div class="p-icon">🏥</div><h3 data-fr="Hôpital / Clinique" data-en="Hospital / Clinic"></h3><p data-fr="Patients, rendez-vous, facturation, laboratoire, spécialisations" data-en="Patients, appointments, billing, laboratory, specialisations"></p></div>
+      <div class="platform-card"><div class="p-icon">🔬</div><h3 data-fr="Laboratoire" data-en="Laboratory"></h3><p data-fr="Commandes de tests, résultats digitaux, intégration hôpital" data-en="Test orders, digital results, hospital integration"></p></div>
+      <div class="platform-card"><div class="p-icon">🏛️</div><h3 data-fr="Gouvernement / ONG" data-en="Government / NGO"></h3><p data-fr="Surveillance des maladies, tableaux de bord, alertes épidémiques" data-en="Disease surveillance, dashboards, outbreak alerts"></p></div>
+      <div class="platform-card"><div class="p-icon">🛡️</div><h3 data-fr="Assurance" data-en="Insurance"></h3><p data-fr="Vérification de couverture, traitement des réclamations, autorisation" data-en="Coverage verification, claims processing, authorization"></p></div>
+    </div>
+  </div></section>
+
+  <!-- COMPETITIVE ADVANTAGE -->
+  <section class="section section-gray"><div class="section-inner">
+    <div class="eyebrow" data-fr="Avantage concurrentiel" data-en="Competitive advantage"></div>
+    <h2 data-fr="Pourquoi Medlynk est différent." data-en="Why Medlynk is different."></h2>
+    <table class="comp-table">
+      <thead><tr>
+        <th data-fr="Fonctionnalité" data-en="Feature"></th>
+        <th>Medlynk</th>
+        <th>Waspito</th>
+        <th data-fr="Autres" data-en="Others"></th>
+      </tr></thead>
+      <tbody>
+        <tr><td data-fr="Stock pharmacie temps réel" data-en="Real-time pharmacy stock"></td><td class="check">✓ Core</td><td class="partial">Limité</td><td class="no">Rare</td></tr>
+        <tr><td data-fr="Cliniques et hôpitaux comme locataires" data-en="Clinics & hospitals as tenants"></td><td class="check">✓ Dashboards</td><td class="partial">Partiel</td><td class="no">Non</td></tr>
+        <tr><td data-fr="Laboratoires intégrés" data-en="Laboratory integration"></td><td class="check">✓ Planifié</td><td class="partial">Connecté</td><td class="no">Rare</td></tr>
+        <tr><td data-fr="Architecture multi-tenant" data-en="Multi-tenant architecture"></td><td class="check">✓ IAM + Rôles</td><td class="no">Plateforme</td><td class="no">Varie</td></tr>
+        <tr><td data-fr="Bilingue FR + EN natif" data-en="Bilingual FR + EN native"></td><td class="check">✓ Natif</td><td class="check">✓ Oui</td><td class="partial">Varie</td></tr>
+        <tr><td data-fr="Portail épidémies / gouvernement" data-en="Outbreak / government portal"></td><td class="check">✓ Intégré</td><td class="no">Non</td><td class="no">Non</td></tr>
+        <tr><td data-fr="Urgences (ambulance, pompiers)" data-en="Emergency (ambulance, fire)"></td><td class="check">✓ 2 taps</td><td class="no">Non</td><td class="no">Non</td></tr>
+      </tbody>
+    </table>
+  </div></section>
+
+  <!-- PRINCIPLE -->
+  <section class="section"><div class="section-inner center">
+    <div class="eyebrow" data-fr="Notre principe" data-en="Our principle"></div>
+    <h2 data-fr="L'accès aux soins doit rester juste et gratuit pour les patients." data-en="Healthcare access must remain fair and free for patients."></h2>
+    <p class="section-desc" style="margin:0 auto 20px;max-width:650px" data-fr="Les patients ne paient jamais pour chercher un médicament ou un hôpital. Les établissements sont classés par proximité, disponibilité et vérification — jamais par qui paie le plus. Aucune pharmacie ne peut acheter un placement préférentiel." data-en="Patients never pay to search for a medicine or hospital. Facilities are ranked by proximity, availability and verification — never by who pays more. No pharmacy can buy preferential placement."></p>
+  </div></section>
+
+  <!-- FOUNDER -->
+  <section class="section section-light"><div class="section-inner">
+    <div class="eyebrow" data-fr="Le fondateur" data-en="The founder"></div>
+    <h2 data-fr="Construit par quelqu'un qui a vu le problème." data-en="Built by someone who saw the problem."></h2>
+    <div class="founder-info">
+      <p data-fr="Ashu Betrand Njoh est un professionnel IT et leader communautaire basé à Douala. Après avoir vu un patient à l'hôpital incapable de trouver son médicament prescrit, il a fondé Medlynk pour que plus personne ne vive cette expérience. Depuis 2019, il sert comme pasteur communautaire à Mambanda — une expérience qui lui a donné un accès direct aux défis d'accès aux soins dans sa communauté." data-en="Ashu Betrand Njoh is an IT professional and community leader based in Douala. After witnessing a patient at a hospital unable to find their prescribed medicine, he founded Medlynk so no one else faces that experience. Since 2019, he has served as a community pastor in Mambanda — giving him direct insight into healthcare access challenges."></p>
+      <div class="founder-tags">
+        <span class="founder-tag" data-fr="IT & Cloud Computing" data-en="IT & Cloud Computing"></span>
+        <span class="founder-tag" data-fr="Pasteur communautaire depuis 2019" data-en="Community pastor since 2019"></span>
+        <span class="founder-tag" data-fr="Bilingue FR/EN" data-en="Bilingual FR/EN"></span>
+        <span class="founder-tag" data-fr="Ensign College — BYU Pathway" data-en="Ensign College — BYU Pathway"></span>
+        <span class="founder-tag" data-fr="CompTIA Security+ (en cours)" data-en="CompTIA Security+ (in progress)"></span>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- WAITLIST -->
+  <section id="waitlist" class="section section-green"><div class="section-inner center">
+    <h2 class="light" data-fr="Soyez les premiers informés." data-en="Be the first to know."></h2>
+    <p class="section-desc light" style="margin:0 auto 28px" data-fr="Medlynk arrive bientôt à Douala. Laissez votre numéro pour être parmi les premiers à l'utiliser — patient, pharmacie, clinique ou laboratoire." data-en="Medlynk is coming soon to Douala. Leave your number to be among the first to use it — patient, pharmacy, clinic or lab."></p>
+    <div class="waitlist-form">
+      <input type="tel" id="phone-input" placeholder="+237 6XX XXX XXX">
+      <button class="btn btn-primary" onclick="submitWaitlist()" data-fr="Je m'inscris" data-en="Sign me up"></button>
+    </div>
+    <p class="waitlist-note" data-fr="Gratuit. Aucun spam. Notification quand Medlynk est prêt." data-en="Free. No spam. Notification when Medlynk is ready."></p>
+  </div></section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-brand">Med<span>lynk</span> Africa</div>
+    <p data-fr="Infrastructure digitale de santé — Douala, Cameroun" data-en="Digital health infrastructure — Douala, Cameroon"></p>
+    <p>founder@medlynk.me</p>
+    <div class="footer-links">
+      <a href="https://github.com/engrashu/medlynk-africa" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/bashu24" target="_blank">LinkedIn</a>
+      <a href="mailto:founder@medlynk.me">Email</a>
+    </div>
+    <p class="footer-copy">© 2026 Medlynk Africa SARL — Connecting Healthcare Access</p>
+  </footer>
+
+  <script>
+    let currentLang='fr';
+    function switchLang(l){currentLang=l;document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));document.querySelector('.lang-btn[onclick="switchLang(\''+l+'\')"]').classList.add('active');document.documentElement.lang=l;document.querySelectorAll('[data-fr]').forEach(el=>{const t=el.getAttribute('data-'+l);if(!t)return;if(el.tagName==='INPUT')el.placeholder=t;else if(el.tagName==='A'||el.tagName==='BUTTON')el.textContent=t;else el.innerHTML=t})}
+    switchLang('fr');
+    function submitWaitlist(){const p=document.getElementById('phone-input').value.trim();if(!p||p.length<9){alert(currentLang==='fr'?'Veuillez entrer un numéro valide':'Please enter a valid number');return}const b=document.querySelector('.waitlist-form .btn-primary');b.textContent=currentLang==='fr'?'Merci! 🎉':'Thank you! 🎉';b.style.background='#0A2A24';document.getElementById('phone-input').value='';setTimeout(()=>switchLang(currentLang),3000)}
+  </script>
+
+</body>
+</html>

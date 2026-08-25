@@ -10,6 +10,7 @@ const ROLE_MODULES = {
       { id: 'search',        label_fr: 'Recherche',          label_en: 'Search',            icon: 'search' },
       { id: 'appointments',  label_fr: 'Rendez-vous',        label_en: 'Appointments',      icon: 'calendar' },
       { id: 'medications',   label_fr: 'Médicaments',        label_en: 'Medications',       icon: 'pill' },
+      { id: 'emergency',     label_fr: 'Urgences',           label_en: 'Emergency',         icon: 'alert-circle' },
       { id: 'records',       label_fr: 'Dossier médical',    label_en: 'Medical Records',   icon: 'folder' },
       { id: 'messages',      label_fr: 'Messages',           label_en: 'Messages',          icon: 'chat' },
       { id: 'profile',       label_fr: 'Profil',             label_en: 'Profile',           icon: 'user' },
